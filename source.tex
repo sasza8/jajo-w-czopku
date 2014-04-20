@@ -1,18 +1,26 @@
-\documentclass{article}
+\documentclass[draft]{article}
 \nonstopmode
 
-\usepackage{color}
-\usepackage{parskip}
-\usepackage{polski}
-\usepackage[utf8]{inputenc}
-\usepackage{amsthm}
-\usepackage{amsmath}
-\usepackage{amsfonts}
+% UWAGA
+% wbrew temu, co moze sugerowac rozszerzenie .tex,
+% ten dokument kompilujemy XeLaTeX-em!!
 
-\renewcommand{\familydefault}{\sfdefault} 
+% pakiety
+\usepackage{fontspec} % polskie znaki i obsluga czcionek
+\usepackage{parskip} % odstepy miedzy paragrafami
+\usepackage{amsfonts} % /mathbb
 
+%opcje
 \reversemarginpar
+\emergencystretch=100pt
 
+% komendy
+\newcommand{\marginlabel}[1]{\mbox{}\marginpar{\raggedright\hspace{0pt}#1}}
+
+\newcommand{\tw}{\textbf{tw. }}
+\newcommand{\deff}{\textbf{def. }}
+
+% info o dokumencie
 \title{Jajo w czopku}
 \author{Paweł Czerwniński, Nikolaos Dymitriadis, Janusz Korwin-Mikke}
 
@@ -20,13 +28,13 @@
 \maketitle
 
 \section{Języki}
-	\textbf{def.} \textit{alfabetem} nazywamy dowolny skończony zbiór $\Sigma$.
+	\deff \textit{alfabetem} nazywamy dowolny skończony zbiór $\Sigma$.
 	
-	\textbf{def.} \textit{słowem} nad alfabetem $\Sigma$ nazywamy każdy skończony ciąg $w = w_1 w_2 ... w_n$, gdzie $w_1,..., w_n \in \Sigma$. Ciąg pusty nazywamy \textit{słowem pustym} i oznaczamy $\epsilon$. Zbiór wszystkich słów nad $\Sigma$ oznaczamy $\Sigma^*$, zaś zbiór słów niepustych $\Sigma^+$.
+	\deff \textit{słowem} nad alfabetem $\Sigma$ nazywamy każdy skończony ciąg $w = w_1 w_2 ... w_n$, gdzie $w_1,..., w_n \in \Sigma$. Ciąg pusty nazywamy \textit{słowem pustym} i oznaczamy $\epsilon$. Zbiór wszystkich słów nad $\Sigma$ oznaczamy $\Sigma^*$, zaś zbiór słów niepustych $\Sigma^+$.
 	
-	\textbf{def.} \textit{językiem} nazywamy dowolny podzbiór $L \subseteq \Sigma^*$, czyli pewien zbiór słów nad $\Sigma$.
+	\deff \textit{językiem} nazywamy dowolny podzbiór $L \subseteq \Sigma^*$, czyli pewien zbiór słów nad $\Sigma$.
 	
-	\textbf{def.} \marginpar{wyrażenia regularne} \textit{standardowe wyrażenia regularne} to wyrażenia opisujące język przy użyciu:
+	\deff \marginpar{wyrażenia regularne} \textit{standardowe wyrażenia regularne} to wyrażenia opisujące język przy użyciu:
 	\begin{itemize}
 		\item stałych
 		\item konkatenacji
@@ -34,25 +42,25 @@
 		\item operatora $^*$
 	\end{itemize}
 	
-	\textbf{def.} \textit{rozszerzone wyrażenia regularne} - wyrażenia regularne rozszerzone o:
+	\deff \textit{rozszerzone wyrażenia regularne} - wyrażenia regularne rozszerzone o:
 	\begin{itemize}
 		\item dopełnienie
 		\item przecięcie
 	\end{itemize}
 	
-	\textbf{def.} \marginpar{języki regularne}\textit{języki regularne} - języki możliwe do opisania przy użyciu wyrażeń regularnych.
+	\deff \marginpar{języki regularne}\textit{języki regularne} - języki możliwe do opisania przy użyciu wyrażeń regularnych.
 	
-	\textbf{tw.} Jeżeli $L \subseteq 1^*$(\textit{język unarny}), to $L*$ jest językiem regularnym.
+	\tw Jeżeli $L \subseteq 1^*$(\textit{język unarny}), to $L*$ jest językiem regularnym.
 	
-	\textbf{tw.} przecięcie i dopełnienie języków regularnych jest również językiem regularnym.
+	\tw przecięcie i dopełnienie języków regularnych jest również językiem regularnym.
 	
-	\textbf{tw.} (lemat Higmana) Niech $v \preceq w$ oznacza, iż słowo $v$ jest podciągiem $w$. Dla każdego języka $L \subseteq \Sigma^*$ zbiór $Min_\preceq(L)$ \textit{słów minimalnych} ze względu na $\preceq$ jest skończony. To znaczy, że usuwając z każdego słowa w $L$ część znaków otrzymamy skończony podjęzyk $L' \subseteq L$.
+	\tw (lemat Higmana) Niech $v \preceq w$ oznacza, iż słowo $v$ jest podciągiem $w$. Dla każdego języka $L \subseteq \Sigma^*$ zbiór $Min_\preceq(L)$ \textit{słów minimalnych} ze względu na $\preceq$ jest skończony. To znaczy, że usuwając z każdego słowa w $L$ część znaków otrzymamy skończony podjęzyk $L' \subseteq L$.
 	
-	\textbf{tw.} dla dowolnego języka $L$ nad skończonym alfabetem zbiór podciągów $subs(L)$ oraz zbiór nadciągów $sup(L)$ słów języka $L$ stanowią języki regularne.
+	\tw dla dowolnego języka $L$ nad skończonym alfabetem zbiór podciągów $subs(L)$ oraz zbiór nadciągów $sup(L)$ słów języka $L$ stanowią języki regularne.
 	
-	\textbf{def.} Dla języka $L \subseteq \Sigma^*$ powiemy że słowa $w,w' \in \Sigma^*$ są \textit{L-równoważne}, jeśli $\forall u \in \Sigma^*$ zachodzi $wu \in L \iff w'u \in L$, co oznaczamy $w \sim_L w'$.
+	\deff Dla języka $L \subseteq \Sigma^*$ powiemy że słowa $w,w' \in \Sigma^*$ są \textit{L-równoważne}, jeśli $\forall u \in \Sigma^*$ zachodzi $wu \in L \iff w'u \in L$, co oznaczamy $w \sim_L w'$.
 	
-	\textbf{tw.} jeżeli dla języka $L$ relacja $\sim_L$ posiada nieskończenie wiele klas abstrakcji, to $L$ jest nieregularny.
+	\tw jeżeli dla języka $L$ relacja $\sim_L$ posiada nieskończenie wiele klas abstrakcji, to $L$ jest nieregularny.
 	
 	\textbf{języki nieregularne:}
 		\begin{itemize}
@@ -71,19 +79,19 @@
 			\item $p \rightarrow^w r$ - przejście ze stanu p do r po słowie w
 		\end{itemize}
 	
-	\textbf{	def.} \marginpar{automat} \textit{automatem} nad alfabetem $\Sigma$ nazywamy czwórkę $A = (S, I, F, \sigma)$, to jest zbiór stanów z wyróżnionymi stanami początkowymi i akceptującymi oraz określoną na nich relacją przejścia. Zazwyczaj $I = \{s_0\}$ jest singletonem i utożsamiamy go z $s_0$.
+	\deff \marginpar{automat} \textit{automatem} nad alfabetem $\Sigma$ nazywamy czwórkę $A = (S, I, F, \sigma)$, to jest zbiór stanów z wyróżnionymi stanami początkowymi i akceptującymi oraz określoną na nich relacją przejścia. Zazwyczaj $I = \{s_0\}$ jest singletonem i utożsamiamy go z $s_0$.
 	
-	\textbf{def.} słowo $w = w_1 w_2 ... w_n$ \textit{przeprowadza} automat $A$ ze stanu $s_1$ do stanu $s_{n+1}$, jeżeli istnieją takie $s_2,..., s_n \in S$, że $s_1 \rightarrow^{w_1} s_2 \rightarrow^{w_2} ... \rightarrow^{w_n} s_{n+1}$, co zapisujemy $s_1 \rightarrow^w s_{n+1}$.
+	\deff słowo $w = w_1 w_2 ... w_n$ \textit{przeprowadza} automat $A$ ze stanu $s_1$ do stanu $s_{n+1}$, jeżeli istnieją takie $s_2,..., s_n \in S$, że $s_1 \rightarrow^{w_1} s_2 \rightarrow^{w_2} ... \rightarrow^{w_n} s_{n+1}$, co zapisujemy $s_1 \rightarrow^w s_{n+1}$.
 	
-	\textbf{def.} automat \textit{akceptuje} słowo $w \in \Sigma^*$, jeśli $p \rightarrow^w q$, gdzie p jest stanem początkowym a q akceptującym.
+	\deff automat \textit{akceptuje} słowo $w \in \Sigma^*$, jeśli $p \rightarrow^w q$, gdzie p jest stanem początkowym a q akceptującym.
 	
-	\textbf{def.} automat  $A$ \textit{rozpoznaje} język $L \subseteq \Sigma^*$, jeżeli $L$ jest równy zbiorowi wszystkich słów akceptowanych przez $A$. Oznaczamy go wtedy jako $L = L(A)$.
+	\deff automat  $A$ \textit{rozpoznaje} język $L \subseteq \Sigma^*$, jeżeli $L$ jest równy zbiorowi wszystkich słów akceptowanych przez $A$. Oznaczamy go wtedy jako $L = L(A)$.
 	
-	\textbf{def.} \marginpar{determinizm} automat jest \textit{deterministyczny}, jeśli dla każdych $q \in Q$ oraz $a \in \Sigma$ istnieje dokładnie jedno $p \in Q$ takie, że $q \rightarrow^a p$. Odpowiednio, automat nie będący deterministycznym nazywamy automatem \textit{niedeterministycznym}.
+	\deff \marginpar{determinizm} automat jest \textit{deterministyczny}, jeśli dla każdych $q \in Q$ oraz $a \in \Sigma$ istnieje dokładnie jedno $p \in Q$ takie, że $q \rightarrow^a p$. Odpowiednio, automat nie będący deterministycznym nazywamy automatem \textit{niedeterministycznym}.
 
-	\textbf{tw.} Dla każdego automatu niedeterministycznego istnieje deterministyczny automat który akceptuje te same słowa.
+	\tw Dla każdego automatu niedeterministycznego istnieje deterministyczny automat który akceptuje te same słowa.
 
-	\textbf{def.} automaty deterministyczne $A$ i $B$ są \textit{homomorficzne}, jeżeli istnieje funkcja $h: S_A \rightarrow S_B$, taka że:
+	\deff automaty deterministyczne $A$ i $B$ są \textit{homomorficzne}, jeżeli istnieje funkcja $h: S_A \rightarrow S_B$, taka że:
 	\begin{enumerate}
 		\item jeżeli $s_0$ jest stanem początkowym $A$, to $h(s_0)$ jest stanem początkowym $B$
 		\item jeżeli $s \in S_A$ jest akceptujący, to $h(s) \in B$ również
@@ -91,18 +99,18 @@
 	\end{enumerate}
 	
 	% co to jest to A_L
-	\textbf{tw.} jeśli $A$ jest deterministycznym automatem rozpoznającym $L \subseteq \Sigma^*$ i wszystkie stany $A$ są osiągalne, to istnieje homomorfizm $A \rightarrow^h_{na} A_L$. 
+	\tw jeśli $A$ jest deterministycznym automatem rozpoznającym $L \subseteq \Sigma^*$ i wszystkie stany $A$ są osiągalne, to istnieje homomorfizm $A \rightarrow^h_{na} A_L$. 
 	
-	\textbf{tw.} \marginpar{regularność} język jest regularny wtw. jest rozpoznawany przez pewien skończony automat.
+	\tw \marginpar{regularność} język jest regularny wtw. jest rozpoznawany przez pewien skończony automat.
 
-	\textbf{tw.}(lemat o pompowaniu) niech $L \subseteq \Sigma^*$ - język reguralny. Wówczas istnieje taka stała $c \in \mathbb{N}$, taka że dla każdego słowa $w \in L$, które ma $|w| >= c$, istnieje podział $w = xyz$, taki że $xy^{i}z \in L$ dla każdego $i >= 0$.
+	\tw(lemat o pompowaniu) niech $L \subseteq \Sigma^*$ - język reguralny. Wówczas istnieje taka stała $c \in \mathbb{N}$, taka że dla każdego słowa $w \in L$, które ma $|w| >= c$, istnieje podział $w = xyz$, taki że $xy^{i}z \in L$ dla każdego $i >= 0$.
 
 \subsection{Automaty z $\epsilon$-przejściami}	
-	\textbf{def.} \textit{automat niedeterministyczny z $\epsilon$-przejściami} - automat niedeterministyczny, taki że $\sigma \subseteq (S \times (\Sigma \cup \{\epsilon\}) \times S)$. To znaczy, że automat może spontanicznie przechodzić między stanami pomiędzy kolejnymi znakami czytanego słowa, co oznaczamy $s \rightarrow s'$.
+	\deff \textit{automat niedeterministyczny z $\epsilon$-przejściami} - automat niedeterministyczny, taki że $\sigma \subseteq (S \times (\Sigma \cup \{\epsilon\}) \times S)$. To znaczy, że automat może spontanicznie przechodzić między stanami pomiędzy kolejnymi znakami czytanego słowa, co oznaczamy $s \rightarrow s'$.
 	
-	\textbf{tw.} Dla każdego automatu niedeterministycznego z $\epsilon$-przejściami przejściami istnieje i można obliczyć automat deterministyczny rozpoznający ten sam język.
+	\tw Dla danego automatu niedeterministycznego z $\epsilon$-przejściami przejściami istnieje i można obliczyć automat deterministyczny rozpoznający ten sam język.
 
-%		\textbf{def.} \textit{automat alternujący} - automat, w którym stany są podzielone na 2 grupy: egzystencjalne i uniwersalne:
+%		\deff \textit{automat alternujący} - automat, w którym stany są podzielone na 2 grupy: egzystencjalne i uniwersalne:
 %		\begin{itemize}
 %			\item \textit{semantyka uniwersalna} - każdy możliwy stan musi być akceptującym
 %			\item \textit{semantyka egzystencjalna} - istnieje jakieś przejście że trafiamy do stanu akceptującego
@@ -115,6 +123,6 @@
 %	\textbf{Tw.} Niech $L^*$ - dowolny język. Wówczas L jest jezykiem reguralnym wtw. A(L) ma skończoną liczbę stanów, dodatkowo $A_L$ ma minimalną liczbe stanów spośród automatów deterministycznych rozpoznających L.
 
 \section{Obliczenia}
-	\textbf{def.} Jan jest \textit{kucem}.
+	\deff Jan jest \textit{kucem}.
 
 \end{document}
