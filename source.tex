@@ -125,4 +125,25 @@
 \section{Obliczenia}
 	\deff Jan jest \textit{kucem}.
 
+\section{Gramatyki Bezkontekstowe}
+	Oznaczenia:
+	\begin{itemize}
+		\item $N$ - zbiór zmiennych (nieterminali)
+		\item $T$ - zbiór stałych (terminali)
+		\item $S \in N$  - symbol początkowy
+		\item $P = \{ X \rightarrow \alpha : X \in N, \alpha \in T \}$ - zbiór reguł (produkcji)
+	\end{itemize}
+	
+	\deff \marginlabel{gramatyka bezkontekstowa}\textit{Gramatyka bezkontekstowa} to czwórka $G = (N, T, S, P)$. Gramatyka \textit{generuje} pewien język, będący zbiorem wszyskich słów, które mozna otrzymać przekształcając symbol początkowy S przy pomocy reguł P. Ten język nazywamy \textit{generowanym} i oznaczamy $L{G}$.
+	
+	\deff Nieterminal jest \textit{zbędny}, jeżeli nie występuje w wyprowadzeniu żadnego słowa z języka. To znaczy, jeżeli nie jest osiągalny z $S$ poprzez przekształcanie zgodnie z produkcjami, lub przekształcenie takie nie daje finalnie słowa terminalnego. W szczególności, wszystkie nieterminale są zbędne wtw. gdy język jest pusty, czyli $S$ jest zbędne.
+	
+	\deff Gramatyka bezkontekstowa jest \textit{liniowa}, jeżeli w wyrażeniu po prawej stronie każdej produkcji występuje co najwyżej jeden nieterminal. Ponadto jest ona \textit{jednostronnie} liniowa, jeżeli stoi on w wyrażeniu zawsze na początku(\textit{lewostronnie}) lub na końcu(\textit{prawostronnie}).
+	
+	\tw Język jest regulany wtw. gdy jest generowany przez pewną gramatykę jednostronnie liniową.
+	
+	\deff \textit{Językiem Dycka $k$-tego rzędy} nazywamy język składający się z poprawnych nawiasowań przy użyciu $k$ nawiasów. Przykład dla $k=2$:
+		\[S \rightarrow SS | (S) | [S] | () | [] | \epsilon \]
+
+	\tw Jeżeli gramatyka $G$ generuje język niezawierający słowa pustego, to można przekształcić ją w równoważną gramatykę $G'$ nie korzystającą ze słowa pustego. Rozmiar gramatyki może wzrosnąć wykładniczo w stosunku do wyjściowej.
 \end{document}
